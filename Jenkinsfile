@@ -6,7 +6,7 @@ pipeline {
   stages {
     stage('Test') {
       steps {
-        sh "mvn -s settings.xml clean test -Dpublic.ip=${params.PUBLIC_IP}"
+        sh "mvn clean test -Dpublic.ip=${params.PUBLIC_IP}"
       }
     }
   }
