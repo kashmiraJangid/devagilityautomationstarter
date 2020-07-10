@@ -47,9 +47,9 @@ public class Stepdefs {
          driver.get(applicationUrl);
     }
 
-    @When("I enter name (.*)")
-    public void I_enter_name(String name) throws Throwable {
-        driver.findElement(By.id("text-input__name")).sendKeys(name);
+    @When("^I enter name (.+)$")
+    public void I_enter_name(String username) throws Throwable {
+        driver.findElement(By.xpath("//*[@id=\"text-input__name\"]")).sendKeys(username);
     }
 
     @Then("I click on greetings button")
