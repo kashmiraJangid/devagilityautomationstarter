@@ -1,12 +1,12 @@
 pipeline {
   agent any
   parameters{
-    string(name: 'PUBLIC_IP')
+    string(name: 'url')
   }
   stages {
     stage('Test') {
       steps {
-        sh "mvn clean test -Dpublic.ip=${params.PUBLIC_IP}"
+        sh "mvn clean test -Durl=${params.url}"
       }
     }
   }
