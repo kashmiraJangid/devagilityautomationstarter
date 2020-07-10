@@ -8,12 +8,15 @@ import cucumber.api.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-
 import java.net.URL;
 
+
 public class Stepdefs {
+    static final String URL = "url";
+    static final String PROPERTY_FILE = "config.properties";
     private String username, authkey;
     private RemoteWebDriver driver;
+    private String applicationUrl;
 
     @Before
     public void setUp() throws Throwable {
@@ -22,6 +25,9 @@ public class Stepdefs {
         authkey = "u801581e29d7f096"; //replace with your authkey
 
         String browser = System.getProperty("browser");
+        applicationUrl = System.getProperty("url");
+        if (applicationUrl == null || applicationUrl == "")
+            applicationUrl = "http://digital-away-day.scottishpower.co.uk/";
 
         DesiredCapabilities caps = new DesiredCapabilities();
         
@@ -34,9 +40,11 @@ public class Stepdefs {
 
         driver = new RemoteWebDriver(new URL("http://" + username + ":" + authkey +"@hub.crossbrowsertesting.com:80/wd/hub"), caps);
     }
+
     @Given("I go to my personalised greeting App")
     public void I_go_to_my_personalised_greeting_app() throws Throwable {
-         driver.get("https://rotten-tomato.azurewebsites.net/");
+         System.out.println("applicationUrl : "+applicationUrl);
+         driver.get(applicationUrl);
     }
 
     @When("I enter name (.*)")
